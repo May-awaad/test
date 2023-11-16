@@ -6,14 +6,14 @@ import cors from 'cors'
 import { globalErrorHandling } from './utils/errorHandling.js'
 const bootstrap = (app, express) => {
     app.use(cors())
-    // app.use(express.json())
-    // app.use("/auth", authRouter)
-    // app.use("/user", userRouter)
+    app.use(express.json())
+    app.use("/auth", authRouter)
+    app.use("/user", userRouter)
 
-    app.get("/", (req, res, next) => {
+    app.use("*", (req, res, next) => {
         return res.json({ message: "In-valid Routing" })
     });
-    // app.use(globalErrorHandling)
+    app.use(globalErrorHandling)
     connectDB()
 }
 export default bootstrap
